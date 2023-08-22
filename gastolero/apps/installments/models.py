@@ -38,7 +38,8 @@ class Installment(models.Model):
 
 
 class Period(models.Model):
-    account = models.ForeignKey('accounts.Account', on_delete=models.CASCADE)
+    account = models.ForeignKey('accounts.Account', on_delete=models.CASCADE,
+                                limit_choices_to={'kind': 'credit'})
 
     start_at = models.DateField()
     end_at = models.DateField()
