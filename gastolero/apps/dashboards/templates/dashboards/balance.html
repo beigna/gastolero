@@ -1,0 +1,21 @@
+
+
+<table>
+
+  <tr>
+    <th>Bank</th>
+    <th>Account</th>
+    <th>Kind</th>
+    <th>Balance</th>
+  </tr>
+  {% for account in accounts %}
+  <tr>
+    <td>{{ account.bank.name }}</td>
+    <td>{{ account.name }}</td>
+    <td>{{ account.get_kind_display }}</td>
+    <td>$1,000.00</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
