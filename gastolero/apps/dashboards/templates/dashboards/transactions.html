@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<form action="" method="get">
+  <ul>
+    <li>
+      <label for="timestamp_from">From:</label>
+      <input type="date" name="timestamp_from" id="timestamp_from" value="{{ timestamp_from }}">
+    </li>
+    <li>
+      <label for="timestamp_to">To:</label>
+      <input type="date" name="timestamp_to" id="timestamp_to" value="{{ timestamp_to }}">
+    </li>
+    <li>
+      <button type="submit">Filter</button>
+    </li>
+  </ul>
+</form>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>Account</th>
+  </tr>
+  {% for trans in transactions %}
+  <tr>
+    <td>{{ trans.timestamp }}</td>
+    <td>{{ trans.amount }}</td>
+    <td>{{ trans.account.name }} {{ trans.account.bank.name }}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+
+</html>

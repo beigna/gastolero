@@ -1,7 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<form action="" method="get">
+  <ul>
+    <li>
+      <label for="date_from">From:</label>
+      <input type="date" name="date_from" id="date_from" value="{{ date_from }}">
+    </li>
+    <li>
+      <label for="date_to">To:</label>
+      <input type="date" name="date_to" id="date_to" value="{{ date_to }}">
+    </li>
+    <li>
+      <button type="submit">Filter</button>
+    </li>
+  </ul>
+</form>
 
 <table>
-
   <tr>
     <th>Bank</th>
     <th>Account</th>
@@ -19,3 +35,5 @@
 
 </table>
 
+
+</html>
