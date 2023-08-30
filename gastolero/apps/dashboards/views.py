@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from accounts.models import Account
 from transactions.models import Transaction
+from transactions.filters import TransactionFilter
 
 
 def balance(request):
@@ -37,23 +38,24 @@ def last_day_of_month(any_day):
 def transactions(request):
     transactions = Transaction.objects.all()
 
-    # timestamp based filters
-    timestamp_from = request.GET.get('timestamp_from') or \
-        timezone.now().replace(day=1).strftime('%Y-%m-%d')
-    timestamp_to = request.GET.get('timestamp_to') or \
-        last_day_of_month(timezone.now()).strftime('%Y-%m-%d')
+    trans_filter = TransactionFilter(request.GET, queryset=transactions)
 
-    transactions = transactions.filter(
-        timestamp__gte=timestamp_from,
-        timestamp__lte=timestamp_to
-    )
+    # timestamp based filters
+    # timestamp_from = request.GET.get('timestamp_from') or \
+    #     timezone.now().replace(day=1).strftime('%Y-%m-%d')
+    # timestamp_to = request.GET.get('timestamp_to') or \
+    #     last_day_of_month(timezone.now()).strftime('%Y-%m-%d')
+
+    # transactions = transactions.filter(
+    #     timestamp__gte=timestamp_from,
+    #     timestamp__lte=timestamp_to
+    # )
 
     return render(
         request,
         'dashboards/transactions.html',
         {
-            'transactions': transactions,
-            'timestamp_from': timestamp_from,
-            'timestamp_to': timestamp_to,
+            'transactions': trans_filter.qs,
+            'filters_form': trans_filter.form,
         }
     )
